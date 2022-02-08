@@ -20,7 +20,7 @@ ek._.handleClicks = function (e) {
 
   e.target.classList.forEach((element) => {
     if (typeof ek._.clickStates[element] !== "undefined") {
-      ek._.clickStates[element].enter(optionalData);
+      ek._.clickStates[element].enter(e, optionalData);
     }
   });
 

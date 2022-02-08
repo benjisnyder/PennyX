@@ -90,6 +90,7 @@ a:visited,
 a:hover,
 a:active {
   text-decoration: none;
+  color: var(--ek-color-blue-80);
 }
 
 /* Icons */
@@ -504,6 +505,42 @@ body .ek-close-workspace-tab,
 
 .ek-close-sub-tab:hover {
   background: var(--ek-color-grey-40);
+}
+
+/* Tertiary Tabs */
+.ek-tabs > ul {
+  margin: 0 0 var(--ek-size-24);
+  padding: 0;
+  list-style-type: none;
+}
+
+.ek-tabs > ul .ek-selected-true {
+  text-decoration: none;
+}
+
+.ek-tabs > ul li {
+  display: inline-block;
+  margin-right: var(--ek-size-24);
+}
+
+.ek-tabs > ul li a {
+  display: block;
+  border-bottom: var(--ek-size-2) solid var(--ek-color-grey-40);
+  padding: var(--ek-size-6) var(--ek-size-8);
+  color: var(--ek-color-grey-80);
+}
+
+.ek-tabs > ul .ek-selected-true a {
+  border-bottom: var(--ek-size-2) solid var(--ek-color-green-60);
+  color: var(--ek-color-black);
+}
+
+.ek-tabs > div {
+  display: none;
+}
+
+.ek-tabs > .ek-selected-true {
+  display: block;
 }
 
 /* Utilities */

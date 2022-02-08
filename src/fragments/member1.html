@@ -3,38 +3,68 @@
     <h1>{{label}}</h1>
   </div>
 
-  <div class="ek-columns ek-col-0-2-1">
-    <div class="ek-columns">
-      <div class="ek-columns ek-col-fill">
-        <div class="ek-card">1</div>
-        <div class="ek-card">2</div>
-        <div class="ek-card">3</div>
-      </div>
-      <div class="ek-columns ek-col-fill">
-        <div class="ek-card">1</div>
-        <div class="ek-card">2</div>
-        <div class="ek-card">3</div>
-      </div>
-      <div class="ek-columns ek-card">
-        <h1>Test Links</h1>
-        <a class="ek-action-open-record" data-ek='{"id":"1"}' href=""
-          >Enrique Desperado</a
-        >
-        <a class="ek-action-open-record" data-ek='{"id":"1-loan"}' href=""
-          >Loan #444555</a
-        >
-        <a
-          class="ek-action-open-record"
-          data-ek='{"id":"1-new-dispute"}'
-          href=""
-          >New Dispute</a
-        >
+  <div class="ek-tabs">
+    <ul>
+      <li class="ek-selected-true">
+        <a class="ek-action-tab" href="">Overview</a>
+      </li>
+      <li><a class="ek-action-tab" href="">Accounts</a></li>
+      <li><a class="ek-action-tab" href="">Cards</a></li>
+      <li><a class="ek-action-tab" href="">Transactions</a></li>
+      <li><a class="ek-action-tab" href="">More</a></li>
+    </ul>
+    <div class="ek-selected-true">
+      <div class="ek-columns ek-col-0-2-1">
+        <div class="ek-columns">
+          <div class="ek-columns ek-col-fill">
+            <div class="ek-card">1</div>
+            <div class="ek-card">2</div>
+            <div class="ek-card">3</div>
+          </div>
+          <div class="ek-columns ek-col-fill">
+            <div class="ek-card">1</div>
+            <div class="ek-card">2</div>
+            <div class="ek-card">3</div>
+          </div>
+          <div class="ek-columns ek-card">
+            <h3>Accounts</h3>
+          </div>
+        </div>
+        <div class="ek-columns">
+          <div class="ek-card">
+            <p>
+              <a class="ek-action-open-record" data-ek='{"id":"1"}' href=""
+                >Enrique Desperado</a
+              >
+            </p>
+            <p>
+              <a class="ek-action-open-record" data-ek='{"id":"1-loan"}' href=""
+                >Loan #444555</a
+              >
+            </p>
+            <p>
+              <a
+                class="ek-action-open-record"
+                data-ek='{"id":"1-new-dispute"}'
+                href=""
+                >New Dispute</a
+              >
+            </p>
+            <p>
+              <a
+                class="ek-action-open-record"
+                data-ek='{"id":"1-edit-member"}'
+                href=""
+                >Edit Member</a
+              >
+            </p>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="ek-columns">
-      <div class="ek-card">
-        <p>right column</p>
-      </div>
-    </div>
+    <div>Accounts</div>
+    <div>Cards</div>
+    <div>Transactions</div>
+    <div>More</div>
   </div>
 </section>

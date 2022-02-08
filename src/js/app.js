@@ -31,7 +31,7 @@ import { ek } from "./ek";
       isAppTab: true
     },
     {
-      label: "Enrique Desperado",
+      label: "Enrique Romero",
       id: "1",
       fragment: "member1",
       icon: "person_outline",
@@ -48,6 +48,12 @@ import { ek } from "./ek";
       id: "1-new-dispute",
       fragment: "subtabview",
       relatedTo: "1"
+    },
+    {
+      label: "Edit Member",
+      id: "1-edit-member",
+      fragment: "subtabview",
+      relatedTo: "1"
     }
   ];
 
@@ -55,15 +61,19 @@ import { ek } from "./ek";
   START: Penny specific functions
   */
 
-  function getOpenWorkspace(record) {
+  function getOpenWorkspaceView(record) {
     return document.querySelector("#ek-workspace-" + record.id);
+  }
+
+  function getOpenWorkspaceTab(record) {
+    return document.querySelector("#ek-workspace-tab-" + record.id);
   }
 
   function selectWorkspace(record, callback) {
     var views = document.querySelectorAll(".ek-workspace");
-    var viewToSelect = getOpenWorkspace(record);
+    var viewToSelect = getOpenWorkspaceView(record);
     var tabs = document.querySelectorAll("#ek-workspace-tabs li");
-    var tabToSelect = document.querySelector("#ek-workspace-tab-" + record.id);
+    var tabToSelect = getOpenWorkspaceTab(record);
     var selCls = "ek-selected-true";
 
     if (views && viewToSelect && tabs && tabToSelect) {
@@ -104,26 +114,48 @@ import { ek } from "./ek";
       (element) => element.id === record.relatedTo
     );
 
-    if (getOpenWorkspace(parentRecord)) {
+    if (getOpenWorkspaceView(parentRecord)) {
       selectWorkspace(parentRecord, callback);
     } else {
       loadWorkspace(parentRecord, doSelect, callback);
     }
   }
 
-  function getOpenSubtab(record) {
+  function closeWorkspace(id) {
+    var match = g_data.find((element) => element.id === id);
+    var targetView = getOpenWorkspaceView(match);
+    var targetTab = getOpenWorkspaceTab(match);
+    var tabs = document.getElementById("ek-workspace-tabs");
+    var newTabToSelectData;
+
+    targetView.remove();
+    targetTab.remove();
+
+    newTabToSelectData = tabs
+      .querySelectorAll("li:last-of-type .ek-action-open-record")[0]
+      .getAttribute("data-ek"); // select the last tab at the end and extract the target record ID
+
+    openRecord(JSON.parse(newTabToSelectData).id);
+  }
+
+  // Returns a dom element if the subtab is open somwewhere
+  function getOpenSubtabView(record) {
     return document.querySelector("#ek-subtab-view-" + record.id);
+  }
+
+  function getOpenSubtab(record) {
+    return document.querySelector("#ek-subtab-" + record.id);
   }
 
   function selectSubtab(record, callback) {
     var views = document.querySelectorAll(
       "#ek-subtab-views-" + record.relatedTo + " .ek-sub-tab-view"
     );
-    var viewToSelect = getOpenSubtab(record);
+    var viewToSelect = getOpenSubtabView(record);
     var tabs = document.querySelectorAll(
       "#ek-subtabs-" + record.relatedTo + " li"
     );
-    var tabToSelect = document.querySelector("#ek-subtab-" + record.id);
+    var tabToSelect = getOpenSubtab(record);
     var selCls = "ek-selected-true";
 
     if (viewToSelect) {
@@ -164,7 +196,7 @@ import { ek } from "./ek";
     }
 
     function doOpenSubtab() {
-      if (getOpenSubtab(record)) {
+      if (getOpenSubtabView(record)) {
         selectSubtab(record, callback);
       } else {
         loadSubtab(record, callback);
@@ -174,10 +206,32 @@ import { ek } from "./ek";
     // check if parent record subtab is open yet and
     // make sure the parent record always opens as the first tab
     // (if, for instance user is opening a Loan record directly)
-    if (getOpenSubtab(parentRecord) === null) {
+    if (getOpenSubtabView(parentRecord) === null) {
       loadSubtab(parentRecord, doOpenSubtab);
     } else {
       doOpenSubtab();
+    }
+  }
+
+  function closeSubtab(id) {
+    var match = g_data.find((element) => element.id === id);
+    var targetView = getOpenSubtabView(match);
+    var targetTab = getOpenSubtab(match);
+    var tabs = targetTab.closest(".ek-sub-tabs");
+    var newTabToSelectData;
+
+    targetView.remove();
+    targetTab.remove();
+
+    if (match.id === match.relatedTo) {
+      // it's the primary subtab, so close the workspace
+      closeWorkspace(id);
+    } else {
+      newTabToSelectData = tabs
+        .querySelectorAll("li:last-of-type .ek-action-open-record")[0]
+        .getAttribute("data-ek"); // select the last tab at the end and extract the target record ID
+
+      openRecord(JSON.parse(newTabToSelectData).id);
     }
   }
 
@@ -223,7 +277,7 @@ import { ek } from "./ek";
 
   ek.addClickState({
     name: "ek-action-open-record",
-    enter: function (data) {
+    enter: function (e, data) {
       data = JSON.parse(data);
 
       openRecord(data.id);
@@ -232,7 +286,7 @@ import { ek } from "./ek";
 
   ek.addClickState({
     name: "ek-action-toggle-class",
-    enter: function (data) {
+    enter: function (e, data) {
       data = JSON.parse(data);
       var target = document.querySelector(data.target);
 
@@ -240,6 +294,46 @@ import { ek } from "./ek";
     }
   });
 
+  ek.addClickState({
+    name: "ek-action-close-subtab",
+    enter: function (e, data) {
+      data = JSON.parse(data);
+
+      closeSubtab(data.id);
+    }
+  });
+
+  ek.addClickState({
+    name: "ek-action-close-workspace",
+    enter: function (e, data) {
+      data = JSON.parse(data);
+
+      closeWorkspace(data.id);
+    }
+  });
+
+  ek.addClickState({
+    name: "ek-action-tab",
+    enter: function (e, data) {
+      var target = e.target;
+      var tabContainer = target.closest(".ek-tabs");
+      var tabUl = target.closest(".ek-tabs > ul");
+      var tabs = tabUl.querySelectorAll("li");
+      var clickedLi = target.closest("li");
+      var clickedIndex = Array.prototype.indexOf.call(
+        tabUl.children,
+        clickedLi
+      );
+      var tabViews = tabContainer.querySelectorAll(":scope > div");
+      var tabViewToSelect = tabViews[clickedIndex];
+      var selCls = "ek-selected-true";
+
+      console.log();
+
+      ek.util.switchClass(tabViews, tabViewToSelect, selCls);
+      ek.util.switchClass(tabs, clickedLi, selCls);
+    }
+  });
   /*
   END: Wiring of events and ek actions
   */
