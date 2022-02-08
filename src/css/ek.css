@@ -1,0 +1,512 @@
+:root {
+  --ek-color-modal-backdrop: rgba(155, 155, 171, 0.8);
+  --ek-color-black: rgba(51, 51, 51, 1);
+  --ek-color-grey-20: rgba(250, 250, 252, 1);
+  --ek-color-grey-30: rgba(245, 245, 248, 1);
+  --ek-color-grey-40: rgba(227, 227, 232, 1);
+  --ek-color-grey-60: rgba(198, 198, 207, 1);
+  --ek-color-grey-80: rgba(155, 155, 171, 1);
+  --ek-color-grey-100: rgba(116, 117, 140, 1);
+  --ek-color-white: rgba(255, 255, 255, 1);
+  --ek-color-blue-10: rgba(244, 249, 255, 1);
+  --ek-color-blue-20: rgba(230, 240, 255, 1);
+  --ek-color-blue-40: rgba(155, 195, 255, 1);
+  --ek-color-blue-60: rgba(36, 110, 227, 1);
+  --ek-color-blue-80: rgba(24, 88, 190, 1);
+  --ek-color-yellow-20: rgba(255, 243, 214, 1);
+  --ek-color-yellow-60: rgba(255, 200, 71, 1);
+  --ek-color-yellow-80: rgba(204, 143, 0, 1);
+  --ek-color-red-20: rgba(253, 237, 241, 1);
+  --ek-color-red-60: rgba(207, 23, 69, 1);
+  --ek-color-red-80: rgba(159, 15, 51, 1);
+  --ek-color-green-20: rgba(230, 252, 241, 1);
+  --ek-color-green-60: rgba(20, 169, 97, 1);
+  --ek-color-green-80: rgba(13, 109, 63, 1);
+  --ek-color-clear: rgba(0, 0, 0, 0);
+
+  /* Adhoc/specific colors */
+  --ek-color-green-brand: rgba(45, 227, 142, 1);
+  --ek-color-left-rail-background: rgba(45, 51, 81, 1);
+  --ek-color-left-rail-selected: rgba(30, 32, 50, 1);
+  --ek-color-left-rail-hover: rgba(30, 32, 50, 0.5);
+  --ek-color-border: rgba(218, 224, 231, 1);
+  --ek-color-base-background: rgb(249, 249, 249, 1);
+
+  /* sanctioned & unsanctioned size spacing values */
+  --ek-size-2: 0.143rem; /* not sanctioned: used in icon configuration */
+  --ek-size-4: 0.286rem;
+  --ek-size-6: 0.429rem; /* not sanctioned: used in icon configuration */
+  --ek-size-8: 0.571rem;
+  --ek-size-12: 0.857rem;
+  --ek-size-14: 1rem; /* not sanctioned: font */
+  --ek-size-16: 1.143rem;
+  --ek-size-18: 1.286rem; /* not sanctioned: font */
+  --ek-size-20: 1.429rem; /* not sanctioned: font */
+  --ek-size-22: 1.571rem; /* not sanctioned: positioning */
+  --ek-size-24: 1.714rem;
+  --ek-size-28: 2rem; /* not sanctioned: font */
+  --ek-size-30: 2.143rem; /* not sanctioned: used in icon configuration */
+  --ek-size-32: 2.286rem;
+  --ek-size-36: 2.571rem; /* not sanctioned: font */
+  --ek-size-40: 2.857rem; /* not sanctioned: font */
+  --ek-size-44: 3.143rem; /* not sanctioned: logo */
+  --ek-size-48: 3.429rem;
+
+  /* Static dimensions */
+  --ek-size-left-rail-full: 19.143rem;
+  --ek-size-left-rail-collapse: 5.214rem;
+  --ek-size-right-column-full: 22.857rem;
+
+  /* Radius */
+  --ek-radius: var(--ek-size-8);
+  --ek-radius-infinite: 9999px;
+
+  /* Spacing */
+  --ek-gutter: var(--ek-size-24);
+  --ek-margin: var(--ek-size-24);
+  --ek-padding: var(--ek-size-24);
+
+  /* Time */
+  --ek-time-quick: 150ms;
+  --ek-time-comfy: 350ms;
+  --ek-time-slow: 500ms;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+  font-size: 87.5%; /* of browser default 16 = 14 */
+}
+
+body {
+  line-height: var(--ek-size-20);
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+}
+
+/* Icons */
+
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: url(/src/assets/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local("Material Icons"), local("MaterialIcons-Regular"),
+    url(/src/assets/MaterialIcons-Regular.woff2) format("woff2"),
+    url(/src/assets/MaterialIcons-Regular.woff) format("woff"),
+    url(/src/assets/MaterialIcons-Regular.ttf) format("truetype");
+}
+
+.ek-icon {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  font-size: var(--ek-size-24);
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: "liga";
+
+  color: var(--ek-color-black);
+}
+
+/* Text */
+h1,
+h2,
+h3,
+p {
+  margin: 0 0 var(--ek-size-24);
+}
+
+.ek-text-header,
+H1 {
+  font-size: var(--ek-size-36);
+  line-height: var(--ek-size-40);
+  font-weight: 700;
+}
+
+.ek-text-sub-header,
+H2 {
+  font-size: var(--ek-size-28);
+  line-height: var(--ek-size-32);
+  font-weight: 300;
+}
+
+.ek-text-title,
+H3 {
+  font-size: var(--ek-size-18);
+  line-height: var(--ek-size-24);
+  font-weight: 700;
+}
+
+.ek-text-default {
+  font-size: var(--ek-size-14);
+  line-height: var(--ek-size-20);
+}
+
+.ek-text-meta {
+  font-size: var(--ek-size-12);
+  line-height: var(--ek-size-16);
+}
+
+.ek-text-strong {
+  font-weight: 700;
+}
+
+/* POC Grid & layout CSS */
+
+.ek-columns {
+  display: grid;
+  grid-gap: var(--ek-size-24);
+  grid-auto-rows: min-content;
+}
+
+.ek-col-0-2-1 {
+  grid-template-columns: 1fr var(--ek-size-right-column-full);
+}
+
+.ek-col-fill {
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+}
+
+.ek-card {
+  border: 1px solid rgba(116, 117, 140, 0.2);
+  background-color: white;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.ek-highlight-panel {
+  border: none;
+  padding: 0;
+}
+
+.ek-highlight-panel h1 {
+  margin: 0;
+}
+
+.ek-visible-false {
+  display: none !important; /* ek-visible-false is a god attribute meant to override any visibility */
+}
+/* App Chrome and architecture */
+#ek-left-rail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--ek-size-left-rail-full);
+  padding: var(--ek-size-14);
+  background: var(--ek-color-left-rail-background);
+  color: var(--ek-color-white);
+  transition: width var(--ek-time-comfy);
+}
+
+#ek-left-rail h1 {
+  position: relative;
+  margin: 0 0 var(--ek-size-16) var(--ek-size-6);
+  padding-left: var(--ek-size-44);
+  font-size: var(--ek-size-18);
+  transition: all var(--ek-time-comfy);
+}
+
+#ek-left-rail-toggle {
+  position: absolute;
+  top: var(--ek-size-22);
+  right: var(--ek-size-40);
+}
+
+.ek-app-logo {
+  display: block;
+  position: absolute;
+  left: var(--ek-size-4);
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: var(--ek-size-30);
+  height: var(--ek-size-30);
+  background-color: var(--ek-color-green-brand);
+  color: var(--ek-color-white);
+  font-size: var(--ek-size-20);
+  line-height: var(--ek-size-30);
+  text-align: center;
+  border-radius: var(--ek-size-30);
+  vertical-align: middle;
+  transition: all var(--ek-time-comfy);
+}
+
+.ek-app-logo .ek-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--ek-size-30);
+  height: var(--ek-size-30);
+  line-height: var(--ek-size-30);
+  display: none;
+  opacity: 0;
+  transition: all var(--ek-time-comfy);
+}
+
+.ek-app-logo:hover,
+.ek-collapse-rail .ek-app-logo {
+  background: none;
+  color: var(--ek-color-clear);
+}
+
+.ek-app-logo:hover .ek-icon,
+.ek-collapse-rail .ek-app-logo .ek-icon {
+  display: block;
+  opacity: 1;
+}
+
+#ek-workspaces {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: var(--ek-size-left-rail-full);
+  transition: left var(--ek-time-comfy);
+}
+
+.ek-workspace {
+  display: none;
+}
+
+.ek-workspace.ek-selected-true {
+  display: block;
+}
+
+.ek-sub-tab-view {
+  display: none;
+  max-width: 1440px;
+  min-width: 1024px;
+  margin: 0 auto;
+  padding: var(--ek-size-24);
+}
+
+.ek-sub-tab-view.ek-selected-true {
+  display: grid;
+}
+
+#ek-left-rail .ek-icon {
+  color: var(--ek-color-white);
+}
+
+#ek-left-rail .ek-workspace-tab.ek-selected-true a:first-child .ek-icon {
+  background: var(--ek-color-white);
+  color: var(--ek-color-black);
+}
+
+/* Workspace tabs */
+
+#ek-workspace-tabs {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.ek-workspace-tab {
+  position: relative;
+  margin: 0 0 var(--ek-size-12);
+  border-radius: var(--ek-radius-infinite);
+  overflow: hidden;
+}
+
+.ek-workspace-tab a {
+  display: block;
+  text-decoration: none;
+  color: var(--ek-color-white);
+  transition: background var(--ek-time-comfy);
+}
+
+.ek-workspace-tab a:first-child {
+  padding: var(--ek-size-12) var(--ek-size-32) var(--ek-size-12)
+    var(--ek-size-48);
+  border-radius: var(--ek-radius-infinite);
+  text-overflow: clip;
+  white-space: nowrap;
+  transition: all var(--ek-time-comfy);
+}
+
+.ek-close-workspace-tab {
+  display: block;
+  padding: var(--ek-size-4) var(--ek-size-8);
+  border-radius: var(--ek-radius-infinite);
+}
+
+.ek-workspace-tab a:first-child:hover,
+.ek-close-workspace-tab:hover {
+  background: var(--ek-color-left-rail-hover);
+}
+
+.ek-workspace-tab.ek-selected-true a:first-child,
+.ek-workspace-tab.ek-selected-true a:first-child:hover {
+  background: var(--ek-color-left-rail-selected);
+}
+
+body .ek-close-workspace-tab,
+.ek-workspace-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: var(--ek-size-14);
+  opacity: 1;
+  transition: all var(--ek-time-comfy);
+}
+
+.ek-workspace-icon {
+  display: block;
+  right: auto;
+  left: var(--ek-size-8);
+  width: var(--ek-size-30);
+  height: var(--ek-size-30);
+  border-radius: 100px;
+  text-align: center;
+  font-size: var(--ek-size-20);
+  line-height: var(--ek-size-30);
+  pointer-events: none; /* because the EK prototyping framework uses a single event listener on the document for all clicks, some elements need to not capture mouse clicks */
+}
+
+.ek-workspace-tab.ek-selected-true .ek-close-workspace-tab:hover {
+  background: var(--ek-color-left-rail-background);
+}
+
+/* START left rail collapse state */
+.ek-collapse-rail #ek-left-rail {
+  width: var(--ek-size-left-rail-collapse);
+}
+
+.ek-collapse-rail #ek-left-rail h1 {
+  color: var(--ek-color-clear);
+}
+
+.ek-collapse-rail #ek-workspaces {
+  left: var(--ek-size-left-rail-collapse);
+}
+
+.ek-collapse-rail .ek-close-workspace-tab {
+  right: -2rem;
+  opacity: 0;
+}
+
+.ek-collapse-rail .ek-app-logo .ek-icon {
+  transform: rotate(180deg);
+}
+
+.ek-collapse-rail .ek-workspace-tab a:first-child {
+  color: var(--ek-color-clear);
+}
+/* END left rail collapse state */
+
+/* Sub tabs */
+
+.ek-sub-tab-view-container {
+  position: absolute;
+  top: 57px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+}
+
+.ek-sub-tabs {
+  display: inline-block;
+  width: 100%;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--ek-color-border);
+  background: var(--ek-color-base-background);
+  list-style-type: none;
+  padding: var(--ek-size-12) var(--ek-size-12) 0;
+}
+
+.ek-sub-tabs a {
+  text-decoration: none;
+  color: var(--ek-color-black);
+}
+
+.ek-sub-tab {
+  float: left;
+  height: 44px;
+  margin: 0 var(--ek-size-8) -1px 0;
+  border: 1px solid var(--ek-color-border);
+  border-bottom: none;
+  background: var(--ek-color-base-background);
+  border-radius: var(--ek-radius) var(--ek-radius) 0 0;
+  overflow: hidden;
+}
+
+.ek-sub-tab,
+.ek-sub-tab a {
+  transition: all var(--ek-time-comfy);
+}
+
+.ek-sub-tab a {
+  display: inline-block;
+}
+
+.ek-sub-tab a:first-child {
+  padding: var(--ek-size-12) var(--ek-size-16);
+  white-space: nowrap;
+}
+
+.ek-sub-tab.ek-sub-tab-closed,
+.ek-sub-tab.ek-sub-tab-closed a:first-child {
+  margin-right: 0;
+  border-width: 0;
+}
+
+.ek-sub-tab.ek-sub-tab-closed {
+  width: 0 !important; /* use important because we need to set the width of tabs in javascript in order to be able to animate them to 0 */
+}
+
+.ek-sub-tab.ek-sub-tab-closed a {
+  opacity: 0;
+}
+
+.ek-sub-tab:hover {
+  background: var(--ek-color-white);
+}
+
+.ek-sub-tab.ek-selected-true {
+  height: 45px;
+  background: var(--ek-color-white);
+}
+
+.ek-close-sub-tab {
+  margin: 0 var(--ek-size-14) 0 0;
+  padding: var(--ek-size-4) var(--ek-size-6);
+  border-radius: var(--ek-radius-infinite);
+  line-height: 16px;
+  text-align: center;
+}
+
+.ek-close-sub-tab:hover {
+  background: var(--ek-color-grey-40);
+}
+
+/* Utilities */
+.ek-block {
+  display: block;
+}
