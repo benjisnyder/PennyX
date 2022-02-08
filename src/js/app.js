@@ -10,7 +10,25 @@ import { ek } from "./ek";
       icon: "home",
       closable: false,
       relatedTo: "home",
-      hasOwnSubtabs: true
+      isAppTab: true
+    },
+    {
+      label: "Search",
+      id: "search",
+      fragment: "search",
+      icon: "search",
+      closable: false,
+      relatedTo: "search",
+      isAppTab: true
+    },
+    {
+      label: "Message Center",
+      id: "messages",
+      fragment: "messages",
+      icon: "message",
+      closable: false,
+      relatedTo: "messages",
+      isAppTab: true
     },
     {
       label: "Enrique Desperado",
@@ -22,6 +40,12 @@ import { ek } from "./ek";
     {
       label: "Loan #444555",
       id: "1-loan",
+      fragment: "subtabview",
+      relatedTo: "1"
+    },
+    {
+      label: "New Dispute",
+      id: "1-new-dispute",
       fragment: "subtabview",
       relatedTo: "1"
     }
@@ -51,7 +75,7 @@ import { ek } from "./ek";
     }
   }
 
-  function loadWorkspace(record, callback) {
+  function loadWorkspace(record, doSelect, callback) {
     ek.util.loadFragment({
       target: "#ek-workspace-tabs",
       fragment: "workspacetab",
@@ -59,18 +83,22 @@ import { ek } from "./ek";
       callback: function () {
         ek.util.loadFragment({
           target: "#ek-workspaces",
-          fragment: record.hasOwnSubtabs ? record.fragment : "workspace",
+          fragment: record.isAppTab ? record.fragment : "workspace",
           data: record,
           callback: function () {
-            selectWorkspace(record, callback);
+            if (doSelect !== false) {
+              selectWorkspace(record, callback);
+            }
           }
         });
       }
     });
   }
 
-  function openWorkspace(id, callback) {
+  function openWorkspace(id, doSelect, callback) {
     var record = g_data.find((element) => element.id === id);
+    doSelect = doSelect === false ? false : true;
+
     // parent record could be itself, we store its own id in relatedTo if it should open as its own workspace
     var parentRecord = g_data.find(
       (element) => element.id === record.relatedTo
@@ -79,7 +107,7 @@ import { ek } from "./ek";
     if (getOpenWorkspace(parentRecord)) {
       selectWorkspace(parentRecord, callback);
     } else {
-      loadWorkspace(parentRecord, callback);
+      loadWorkspace(parentRecord, doSelect, callback);
     }
   }
 
@@ -131,7 +159,7 @@ import { ek } from "./ek";
       (element) => element.id === record.relatedTo
     );
 
-    if (record.hasOwnSubtabs) {
+    if (record.isAppTab) {
       return;
     }
 
@@ -160,7 +188,7 @@ import { ek } from "./ek";
       return; // no data
     }
 
-    openWorkspace(match.id, function () {
+    openWorkspace(match.id, true, function () {
       openSubtab(match.id);
     });
   }
@@ -182,6 +210,8 @@ import { ek } from "./ek";
   });*/
 
   openWorkspace("home");
+  openWorkspace("search", false);
+  openWorkspace("messages", false);
 
   g_data.forEach((record) => {
     /* TODO: load subtabs from memory, if needed (not yet storing UI state in memory though) */
