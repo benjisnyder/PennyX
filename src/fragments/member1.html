@@ -26,21 +26,18 @@
             <h3>Highlights</h3>
             <div class="ek-card-controls"><a href="">View all details</a></div>
             <div class="ek-columns ek-col-fill">
-              <div class="ek-label-field">
-                <label>Email</label>
-                <span
-                  ><!--email_off-->
-                  eromodax@gmail.com
-                  <!--/email_off--></span
+              <div>
+                <label class="ek-label">Email</label>
+                <span class="ek-field"><!--email_off-->eromodax@gmail.com<!--/email_off--></span
                 >
               </div>
-              <div class="ek-label-field">
-                <label>Phone Number</label>
-                <span>555-489-7895</span>
+              <div>
+                <label class="ek-label">Phone Number</label>
+                <span class="ek-field">555-489-7895</span>
               </div>
-              <div class="ek-label-field">
-                <label>Last 4 Social</label>
-                <span>9968</span>
+              <div>
+                <label class="ek-label">Last 4 Social</label>
+                <span class="ek-field">9968</span>
               </div>
             </div>
           </div>
@@ -50,34 +47,34 @@
             <div class="ek-tabs ek-tabs-boxes">
               <ul>
                 <li class="ek-selected-true">
-                  <div class="ek-label-field ek-action-tab">
-                    <label>Checking</label>
-                    <strong>$145.75</strong>
+                  <div class="ek-action-tab">
+                    <label class="ek-label">Checking</label>
+                    <strong class="ek-field">$145.75</strong>
                     <span class="ek-pill ek-pill-healthy">Active</span>
-                    <div class="ek-cc ek-cc-debit"></div>
+                    <div class="ek-cc"></div>
                   </div>
                 </li>
                 <li>
-                  <div class="ek-label-field ek-action-tab">
-                    <label>Credit</label>
-                    <strong>$250</strong>
+                  <div class="ek-action-tab">
+                    <label class="ek-label">Credit</label>
+                    <strong class="ek-field">$250</strong>
                     <span class="ek-pill ek-pill-healthy">Active</span>
                     <div class="ek-cc ek-cc-credit"></div>
                   </div>
                 </li>
                 <li>
-                  <div class="ek-label-field ek-action-tab">
-                    <label>Savings</label>
-                    <strong>$575.87</strong>
+                  <div class="ek-action-tab">
+                    <label class="ek-label">Savings</label>
+                    <strong class="ek-field">$575.87</strong>
                     <span class="ek-pill ek-pill-healthy">Active</span>
                     <div class="ek-cc ek-cc-blank"></div>
                   </div>
                 </li>
                 <li>
-                  <div class="ek-label-field ek-action-tab">
-                    <label>Loan</label>
-                    <strong>$0</strong>
-                    <span class="ek-pill ek-pill-healthy">Eligible</span>
+                  <div class="ek-action-tab">
+                    <label class="ek-label">Loan</label>
+                    <strong class="ek-field">$0</strong>
+                    <span class="ek-pill">Eligible</span>
                     <div class="ek-cc ek-cc-blank"></div>
                   </div>
                 </li>
@@ -90,8 +87,8 @@
                     <th>Status</th>
                     <th>Type</th>
                     <th>Id</th>
-                    <th class="ek-td-right">Amount</th>
-                    <th class="ek-td-right">Balance</th>
+                    <th class="ek-text-right">Amount</th>
+                    <th class="ek-text-right">Balance</th>
                   </tr>
                   <tr>
                     <td>Mercado Gas</td>
@@ -99,14 +96,113 @@
                     <td>Settled</td>
                     <td>Merchant debit</td>
                     <td>123456789</td>
-                    <td class="ek-td-right">$10.15</td>
-                    <td class="ek-td-right">$145.75</td>
+                    <td class="ek-text-right">$10.15</td>
+                    <td class="ek-text-right">$145.75</td>
+                  </tr>
+                  <tr>
+                    <td>Mercado Gas</td>
+                    <td>2022-12-02 11:29:45 PDT</td>
+                    <td>Settled</td>
+                    <td>Merchant debit</td>
+                    <td>123456789</td>
+                    <td class="ek-text-right">$10.15</td>
+                    <td class="ek-text-right">$145.75</td>
+                  </tr>
+                  <tr>
+                    <td>Mercado Gas</td>
+                    <td>2022-12-02 11:29:45 PDT</td>
+                    <td>Settled</td>
+                    <td>Merchant debit</td>
+                    <td>123456789</td>
+                    <td class="ek-text-right">$10.15</td>
+                    <td class="ek-text-right">$145.75</td>
+                  </tr>
+                  <tr>
+                    <td>Mercado Gas</td>
+                    <td>2022-12-02 11:29:45 PDT</td>
+                    <td>Settled</td>
+                    <td>Merchant debit</td>
+                    <td>123456789</td>
+                    <td class="ek-text-right">$10.15</td>
+                    <td class="ek-text-right">$145.75</td>
+                  </tr>
+                  <tr>
+                    <td>Mercado Gas</td>
+                    <td>2022-12-02 11:29:45 PDT</td>
+                    <td>Settled</td>
+                    <td>Merchant debit</td>
+                    <td>123456789</td>
+                    <td class="ek-text-right">$10.15</td>
+                    <td class="ek-text-right">$145.75</td>
                   </tr>
                 </table>
               </div>
-              <div>Credit</div>
-              <div>Savings</div>
-              <div>Loan</div>
+              <div>
+                <table>
+                  <tr>
+                    <th>Merchant Name</th>
+                    <th>Date & Time</th>
+                    <th>Status</th>
+                    <th>Type</th>
+                    <th>Id</th>
+                    <th class="ek-text-right">Amount</th>
+                    <th class="ek-text-right">Balance</th>
+                  </tr>
+                  <tr>
+                    <td>Mercado Gas</td>
+                    <td>2022-12-02 11:29:45 PDT</td>
+                    <td>Settled</td>
+                    <td>Merchant debit</td>
+                    <td>123456789</td>
+                    <td class="ek-text-right">$10.15</td>
+                    <td class="ek-text-right">$145.75</td>
+                  </tr>
+                </table>
+              </div>
+              <div>
+                <table>
+                  <tr>
+                    <th>Merchant Name</th>
+                    <th>Date & Time</th>
+                    <th>Status</th>
+                    <th>Type</th>
+                    <th>Id</th>
+                    <th class="ek-text-right">Amount</th>
+                    <th class="ek-text-right">Balance</th>
+                  </tr>
+                  <tr>
+                    <td>Mercado Gas</td>
+                    <td>2022-12-02 11:29:45 PDT</td>
+                    <td>Settled</td>
+                    <td>Merchant debit</td>
+                    <td>123456789</td>
+                    <td class="ek-text-right">$10.15</td>
+                    <td class="ek-text-right">$145.75</td>
+                  </tr>
+                  <tr>
+                    <td>Mercado Gas</td>
+                    <td>2022-12-02 11:29:45 PDT</td>
+                    <td>Settled</td>
+                    <td>Merchant debit</td>
+                    <td>123456789</td>
+                    <td class="ek-text-right">$10.15</td>
+                    <td class="ek-text-right">$145.75</td>
+                  </tr>
+                </table>
+              </div>
+              <div>
+                  <table>
+                    <tr>
+                      <th>Merchant Name</th>
+                      <th>Date & Time</th>
+                      <th>Status</th>
+                      <th>Type</th>
+                      <th>Id</th>
+                      <th class="ek-text-right">Amount</th>
+                      <th class="ek-text-right">Balance</th>
+                    </tr>
+                  </table>
+              </div>
             </div>
           </div>
           <div class="ek-card">
@@ -163,14 +259,14 @@
             <div class="ek-media-block">
               <img src="" />
               <div class="ek-label-field">
-                <label><a href="">Drivers License</a></label>
+                <label class="ek-label"><a href="">Drivers License</a></label>
                 <span class="ek-text-meta">Attached to case #444555</span>
               </div>
             </div>
             <div class="ek-media-block">
               <img src="" />
               <div class="ek-label-field">
-                <label><a href="">January Paystub</a></label>
+                <label class="ek-label"><a href="">January Paystub</a></label>
                 <span class="ek-text-meta">Attached to case #444555</span>
               </div>
             </div>

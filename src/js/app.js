@@ -94,7 +94,7 @@ import { ek } from "./ek";
       callback: function () {
         ek.util.loadFragment({
           target: "#ek-workspaces",
-          fragment: record.isAppTab ? record.fragment : "workspace",
+          fragment: record.isAppTab ? record.fragment : "workspaceview",
           data: record,
           callback: function () {
             if (doSelect !== false) {
@@ -269,10 +269,10 @@ import { ek } from "./ek";
     }
   });*/
 
-  openRecord("1"); // for testing
-  /*openWorkspace("home");
+  //openRecord("1"); // for testing
+  openWorkspace("home");
   openWorkspace("search", false);
-  openWorkspace("messages", false);*/
+  openWorkspace("messages", false);
 
   g_data.forEach((record) => {
     /* TODO: load subtabs from memory, if needed (not yet storing UI state in memory though) */

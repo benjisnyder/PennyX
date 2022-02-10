@@ -34,6 +34,9 @@
   --ek-color-action-hover: rgba(83, 141, 233, 1);
   --ek-color-action-press: rgba(24, 88, 190, 1);
   --ek-color-destructive-press: rgba(248, 191, 205, 1);
+  --ek-color-highlight-border: rgba(192, 247, 221, 1);
+  --ek-color-highlight-background: rgba(192, 247, 221, 0.24); 
+  --ek-color-table-header: rgba(247, 247, 248, 1);
 
   /* sanctioned & unsanctioned size spacing values */
   --ek-size-2: 0.143rem; /* not sanctioned: used in icon configuration */
@@ -291,6 +294,10 @@ H3 {
   transition: all var(--ek-time-comfy);
 }
 
+.ek-app-logo a:hover {
+  text-decoration: none;
+}
+
 .ek-app-logo .ek-icon {
   position: absolute;
   top: 0;
@@ -456,13 +463,17 @@ body .ek-close-workspace-tab,
 
 /* Sub tabs */
 
-.ek-sub-tab-view-container {
+.ek-sub-tab-views {
   position: absolute;
-  top: 57px;
+  top: 52px;
   right: 0;
   bottom: 0;
   left: 0;
   overflow: auto;
+}
+
+.ek-sub-tab-views.ek-sub-tab-view-full {
+  top: 0;
 }
 
 .ek-sub-tabs {
@@ -482,7 +493,7 @@ body .ek-close-workspace-tab,
 
 .ek-sub-tab {
   float: left;
-  height: 44px;
+  height: 39px;
   margin: 0 var(--ek-size-8) -1px 0;
   border: 1px solid var(--ek-color-border);
   border-bottom: none;
@@ -501,7 +512,7 @@ body .ek-close-workspace-tab,
 }
 
 .ek-sub-tab a:first-child {
-  padding: var(--ek-size-12) var(--ek-size-16);
+  padding: var(--ek-size-10) var(--ek-size-16);
   white-space: nowrap;
 }
 
@@ -524,7 +535,7 @@ body .ek-close-workspace-tab,
 }
 
 .ek-sub-tab.ek-selected-true {
-  height: 45px;
+  height: 40px;
   background: var(--ek-color-white);
 }
 
@@ -646,6 +657,10 @@ the tab markup is pretty strict and mustn't change as the JavaScript makes some 
   margin-right: var(--ek-size-24);
 }
 
+.ek-tabs > ul li:last-child {
+  margin-right: 0;
+}
+
 .ek-tabs > ul li a {
   display: block;
   padding: var(--ek-size-6) var(--ek-size-8);
@@ -679,14 +694,29 @@ the tab markup is pretty strict and mustn't change as the JavaScript makes some 
 
 .ek-tabs-boxes > ul li {
   flex-grow: 1;
+  position: relative;
+  border-radius: var(--ek-radius);
   border: 1px solid var(--ek-color-clear);
-  padding: var(--ek-size-12);
+  padding: var(--ek-size-14);
+}
+
+.ek-tabs-boxes > ul li .ek-pill {
+  position: absolute;
+  top: var(--ek-size-12);
+  right: var(--ek-size-12);
+}
+
+.ek-tabs-boxes > ul li:hover {
+  border: 1px solid var(--ek-color-highlight-border);
 }
 
 .ek-tabs-boxes > ul .ek-selected-true {
-  border: 1px solid rgba(192, 247, 221, 1);
-  background:rgba(230, 249, 240, 1);
-  border-radius: var(--ek-radius);
+  border: 1px solid var(--ek-color-highlight-border);
+  background:var(--ek-color-highlight-background);
+}
+
+.ek-tabs-boxes > ul .ek-selected-true .ek-pill {
+  background: var(--ek-color-white);
 }
 
 .ek-tabs > div {
@@ -702,7 +732,98 @@ the tab markup is pretty strict and mustn't change as the JavaScript makes some 
 .ek-pill {
   display: inline-block;
   border-radius: var(--ek-radius-infinite);
-  background: rgba(230, 249, 240, 1);
+  padding: var(--ek-size-4) var(--ek-size-8);
+  background: var(--ek-color-grey-40);
+  color: var(--ek-color-black);
+}
+
+.ek-pill-healthy {
+  background: var(--ek-color-highlight-background);
+  color: var(--ek-color-green-80);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse:collapse;
+  text-align: left;
+}
+
+th:first-child {
+  border-radius: var(--ek-radius) 0 0 var(--ek-radius);
+}
+
+th:last-child {
+  border-radius: 0 var(--ek-radius) var(--ek-radius) 0;
+}
+
+th, td {
+  padding: var(--ek-size-8) var(--ek-size-12);
+}
+
+th {
+  background: var(--ek-color-table-header);
+}
+
+td {
+  border-bottom: 1px solid var(--ek-color-grey-40);
+}
+
+/* Physical card illustrations */
+.ek-cc {
+  display: block;
+  position: relative;
+  height: var(--ek-size-24);
+  max-width: 150px;
+  min-width: 120px;
+  margin: var(--ek-size-10) auto 0;
+  border: 1px solid var(--ek-color-grey-40);
+  border-radius: var(--ek-radius) var(--ek-radius) 0 0;
+  background: linear-gradient(0deg, var(--ek-color-grey-20) 0%, var(--ek-color-white) 100%);
+}
+
+.ek-cc:after, .ek-cc:before {
+  content: "";
+  display: block;
+  width: var(--ek-size-14);
+  height: var(--ek-size-12);
+  position: absolute;
+  bottom: 0;
+  left: var(--ek-size-10);
+  border-radius: var(--ek-size-2) var(--ek-size-2) 0 0;
+  background: var(--ek-color-grey-40);
+}
+
+.ek-cc:before {
+  width: 25px;
+  height: 8px;
+  top: var(--ek-size-8);
+  right: var(--ek-size-4);
+  bottom: auto;
+  left: auto;
+  background: url(/src/assets/chime-logo-green2x.png) no-repeat;
+  background-size: 75%;
+}
+
+.ek-cc-credit {
+  border-color: rgba(18, 151, 86, 1);
+  background: linear-gradient(180deg, #1BC171 0%, #2DBE78 100%);
+}
+
+.ek-cc-credit:before {
+  background-image: url(/src/assets/chime-logo-white2x.png);
+}
+
+.ek-cc-blank {
+  border-style: dashed;
+}
+
+.ek-cc-blank:after {
+  display: none;
+}
+
+.ek-cc-blank:before {
+  background-image: url(/src/assets/chime-logo-gray2x.png);
 }
 
 /* Modals */
@@ -737,16 +858,15 @@ the tab markup is pretty strict and mustn't change as the JavaScript makes some 
 }
 
 /* Labels & Form Fields */
-.ek-label-field > label,
-.ek-label-field > span {
+.ek-label, .ek-field {
   display: block;
 }
 
-.ek-label-field > label {
+.ek-label {
   margin-bottom: var(--ek-size-6);
 }
 
-label {
+.ek-label {
   color: var(--ek-color-grey-100);
 }
 
@@ -761,4 +881,8 @@ label {
 
 .ek-m-bottom {
   margin-bottom: var(--ek-size-24);
+}
+
+.ek-text-right {
+  text-align: right;
 }
