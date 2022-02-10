@@ -7,7 +7,7 @@
   </head>
 
   <body>
-    <section id="ek-left-rail">
+    <section id="ek-nav">
       <h1>
         <span class="ek-app-logo ek-app-logo-penny"
           >P<a
@@ -21,7 +21,12 @@
       <ul id="ek-workspace-tabs"></ul>
     </section>
 
-    <section id="ek-workspaces"></section>
+    <section id="ek-workspaces">
+      <!-- if this isn't here, ek.js will add it to body -->
+      <div id="ek-view-loader" class="ek-visible-false">
+        <img src="src/assets/ek-loading-1.gif" />
+      </div>
+    </section>
     <script src="src/js/app.js"></script>
   </body>
 </html>

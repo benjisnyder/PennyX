@@ -26,17 +26,21 @@
 
   /* Adhoc/specific colors */
   --ek-color-green-brand: rgba(45, 227, 142, 1);
-  --ek-color-left-rail-background: rgba(45, 51, 81, 1);
-  --ek-color-left-rail-selected: rgba(30, 32, 50, 1);
-  --ek-color-left-rail-hover: rgba(30, 32, 50, 0.5);
+  --ek-color-nav-background: rgba(45, 51, 81, 1);
+  --ek-color-nav-selected: rgba(30, 32, 50, 1);
+  --ek-color-nav-hover: rgba(30, 32, 50, 0.5);
   --ek-color-border: rgba(218, 224, 231, 1);
   --ek-color-base-background: rgb(249, 249, 249, 1);
+  --ek-color-action-hover: rgba(83, 141, 233, 1);
+  --ek-color-action-press: rgba(24, 88, 190, 1);
+  --ek-color-destructive-press: rgba(248, 191, 205, 1);
 
   /* sanctioned & unsanctioned size spacing values */
   --ek-size-2: 0.143rem; /* not sanctioned: used in icon configuration */
   --ek-size-4: 0.286rem;
   --ek-size-6: 0.429rem; /* not sanctioned: used in icon configuration */
   --ek-size-8: 0.571rem;
+  --ek-size-10: 0.714rem; /* not sanctioned: used to perfect button padding top and bottom */
   --ek-size-12: 0.857rem;
   --ek-size-14: 1rem; /* not sanctioned: font */
   --ek-size-16: 1.143rem;
@@ -53,9 +57,10 @@
   --ek-size-48: 3.429rem;
 
   /* Static dimensions */
-  --ek-size-left-rail-full: 19.143rem;
-  --ek-size-left-rail-collapse: 5.214rem;
+  --ek-size-nav-full: 19.143rem;
+  --ek-size-nav-collapse: 5.214rem;
   --ek-size-right-column-full: 22.857rem;
+  --ek-size-loading-gif: 15rem;
 
   /* Radius */
   --ek-radius: var(--ek-size-8);
@@ -68,8 +73,11 @@
 
   /* Time */
   --ek-time-quick: 150ms;
-  --ek-time-comfy: 350ms;
+  --ek-time-comfy: 300ms;
   --ek-time-slow: 500ms;
+
+  /* Shadows */
+  --ek-shadow-action-focus: 0px 0px 0px 2px rgba(53, 154, 223, 0.4);
 }
 
 * {
@@ -82,7 +90,9 @@ html {
 }
 
 body {
+  font-size: var(--ek-size-14);
   line-height: var(--ek-size-20);
+  color: var(--ek-color-black);
 }
 
 a,
@@ -91,6 +101,11 @@ a:hover,
 a:active {
   text-decoration: none;
   color: var(--ek-color-blue-80);
+}
+
+a:hover,
+a:active {
+  text-decoration: underline;
 }
 
 /* Icons */
@@ -194,10 +209,17 @@ H3 {
 }
 
 .ek-card {
+  position: relative;
   border: 1px solid rgba(116, 117, 140, 0.2);
   background-color: white;
   border-radius: 8px;
   padding: 24px;
+}
+
+.ek-card-controls {
+  position: absolute;
+  top: var(--ek-size-24);
+  right: var(--ek-size-24);
 }
 
 .ek-highlight-panel {
@@ -205,27 +227,38 @@ H3 {
   padding: 0;
 }
 
-.ek-highlight-panel h1 {
-  margin: 0;
+.ek-highlight-panel .ek-card-controls {
+  top: 0;
+  right: 0;
 }
 
-.ek-visible-false {
-  display: none !important; /* ek-visible-false is a god attribute meant to override any visibility */
+.ek-highlight-panel h1 {
+  position: relative;
+  margin: 0;
+  padding-left: var(--ek-size-48);
 }
+
+.ek-highlight-panel h1 .ek-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: var(--ek-size-40);
+}
+
 /* App Chrome and architecture */
-#ek-left-rail {
+#ek-nav {
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
-  width: var(--ek-size-left-rail-full);
+  width: var(--ek-size-nav-full);
   padding: var(--ek-size-14);
-  background: var(--ek-color-left-rail-background);
+  background: var(--ek-color-nav-background);
   color: var(--ek-color-white);
   transition: width var(--ek-time-comfy);
 }
 
-#ek-left-rail h1 {
+#ek-nav h1 {
   position: relative;
   margin: 0 0 var(--ek-size-16) var(--ek-size-6);
   padding-left: var(--ek-size-44);
@@ -233,7 +266,7 @@ H3 {
   transition: all var(--ek-time-comfy);
 }
 
-#ek-left-rail-toggle {
+#ek-nav-toggle {
   position: absolute;
   top: var(--ek-size-22);
   right: var(--ek-size-40);
@@ -287,7 +320,7 @@ H3 {
   top: 0;
   right: 0;
   bottom: 0;
-  left: var(--ek-size-left-rail-full);
+  left: var(--ek-size-nav-full);
   transition: left var(--ek-time-comfy);
 }
 
@@ -311,11 +344,11 @@ H3 {
   display: grid;
 }
 
-#ek-left-rail .ek-icon {
+#ek-nav .ek-icon {
   color: var(--ek-color-white);
 }
 
-#ek-left-rail .ek-workspace-tab.ek-selected-true a:first-child .ek-icon {
+#ek-nav .ek-workspace-tab.ek-selected-true a:first-child .ek-icon {
   background: var(--ek-color-white);
   color: var(--ek-color-black);
 }
@@ -359,12 +392,12 @@ H3 {
 
 .ek-workspace-tab a:first-child:hover,
 .ek-close-workspace-tab:hover {
-  background: var(--ek-color-left-rail-hover);
+  background: var(--ek-color-nav-hover);
 }
 
 .ek-workspace-tab.ek-selected-true a:first-child,
 .ek-workspace-tab.ek-selected-true a:first-child:hover {
-  background: var(--ek-color-left-rail-selected);
+  background: var(--ek-color-nav-selected);
 }
 
 body .ek-close-workspace-tab,
@@ -391,20 +424,20 @@ body .ek-close-workspace-tab,
 }
 
 .ek-workspace-tab.ek-selected-true .ek-close-workspace-tab:hover {
-  background: var(--ek-color-left-rail-background);
+  background: var(--ek-color-nav-background);
 }
 
 /* START left rail collapse state */
-.ek-collapse-rail #ek-left-rail {
-  width: var(--ek-size-left-rail-collapse);
+.ek-collapse-rail #ek-nav {
+  width: var(--ek-size-nav-collapse);
 }
 
-.ek-collapse-rail #ek-left-rail h1 {
+.ek-collapse-rail #ek-nav h1 {
   color: var(--ek-color-clear);
 }
 
 .ek-collapse-rail #ek-workspaces {
-  left: var(--ek-size-left-rail-collapse);
+  left: var(--ek-size-nav-collapse);
 }
 
 .ek-collapse-rail .ek-close-workspace-tab {
@@ -507,7 +540,97 @@ body .ek-close-workspace-tab,
   background: var(--ek-color-grey-40);
 }
 
-/* Tertiary Tabs */
+/* Buttons */
+
+.ek-button {
+  display: inline-block;
+  margin: 1px; /* used to offset issues in chrome with cutting off inline-block borders */
+  border: 1px solid var(--ek-color-blue-60);
+  padding: var(--ek-size-10) var(--ek-size-18);
+  border-radius: var(--ek-radius-infinite);
+  transition: background var(--ek-time-comfy);
+  cursor: pointer;
+}
+
+.ek-button-primary {
+  background: var(--ek-color-blue-60);
+  color: var(--ek-color-white);
+}
+
+.ek-button-primary:hover {
+  background: var(--ek-color-action-hover);
+}
+
+.ek-button-primary:focus,
+.ek-button-primary:active {
+  background: var(--ek-color-action-press);
+}
+
+.ek-button-secondary {
+  background: var(--ek-color-white);
+  color: var(--ek-color-blue-60);
+}
+
+.ek-button-secondary:hover {
+  background: var(--ek-color-blue-10);
+}
+
+.ek-button-secondary:focus,
+.ek-button-secondary:active {
+  background: var(--ek-color-blue-20);
+}
+
+.ek-button-destructive {
+  border-color: var(--ek-color-red-60);
+  background: var(--ek-color-white);
+  color: var(--ek-color-red-60);
+}
+
+.ek-button-destructive:hover {
+  background: var(--ek-color-red-20);
+}
+
+.ek-button-destructive:focus,
+.ek-button-destructive:active {
+  background: var(--ek-color-destructive-press);
+}
+
+.ek-button:focus,
+.ek-button:focus-visible,
+.ek-button:active {
+  box-shadow: var(--ek-shadow-action-focus);
+  outline: none;
+}
+
+.ek-button:disabled {
+  border: var(--ek-color-grey-60);
+  background: var(--ek-color-grey-60);
+  cursor: default;
+}
+
+.ek-button-group {
+  display: flex;
+}
+
+.ek-button-group .ek-button {
+  margin: 0 -1px 0 0; /* overlap the button borders*/
+  border-radius: 0;
+}
+
+.ek-button-group .ek-button:first-child {
+  border-radius: var(--ek-radius-infinite) 0 0 var(--ek-radius-infinite);
+}
+
+.ek-button-group .ek-button:last-child {
+  border-radius: 0 var(--ek-radius-infinite) var(--ek-radius-infinite) 0;
+}
+
+/* 
+Tertiary Tabs 
+A lot of funny business here with nested CSS selectors in order to keep the HTML a little simpler to work with
+the tab markup is pretty strict and mustn't change as the JavaScript makes some assumptions about it
+*/
+
 .ek-tabs > ul {
   margin: 0 0 var(--ek-size-24);
   padding: 0;
@@ -525,14 +648,45 @@ body .ek-close-workspace-tab,
 
 .ek-tabs > ul li a {
   display: block;
-  border-bottom: var(--ek-size-2) solid var(--ek-color-grey-40);
   padding: var(--ek-size-6) var(--ek-size-8);
+}
+
+.ek-tabs .ek-action-tab {
+  cursor: pointer;
+}
+
+.ek-tabs .ek-action-tab > * {
+  pointer-events: none; /* because the EK prototyping framework uses a single event listener on the document for all clicks, some elements clicks need to fall through to their parent */
+}
+
+.ek-tabs > ul li a:hover {
+  text-decoration: none;
+}
+
+.ek-tabs-standard > ul li a {
+  border-bottom: var(--ek-size-2) solid var(--ek-color-grey-40);
   color: var(--ek-color-grey-80);
 }
 
-.ek-tabs > ul .ek-selected-true a {
+.ek-tabs-standard > ul .ek-selected-true a {
   border-bottom: var(--ek-size-2) solid var(--ek-color-green-60);
   color: var(--ek-color-black);
+}
+
+.ek-tabs-boxes > ul {
+  display: flex;
+}
+
+.ek-tabs-boxes > ul li {
+  flex-grow: 1;
+  border: 1px solid var(--ek-color-clear);
+  padding: var(--ek-size-12);
+}
+
+.ek-tabs-boxes > ul .ek-selected-true {
+  border: 1px solid rgba(192, 247, 221, 1);
+  background:rgba(230, 249, 240, 1);
+  border-radius: var(--ek-radius);
 }
 
 .ek-tabs > div {
@@ -543,7 +697,68 @@ body .ek-close-workspace-tab,
   display: block;
 }
 
+/* Pills */
+
+.ek-pill {
+  display: inline-block;
+  border-radius: var(--ek-radius-infinite);
+  background: rgba(230, 249, 240, 1);
+}
+
+/* Modals */
+.modal,
+#ek-view-loader {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
+  backdrop-filter: blur(2px);
+  transition: opacity var(--ek-time-comfy);
+  opacity: 1;
+}
+
+.modal.ek-visible-false,
+#ek-view-loader.ek-visible-false {
+  opacity: 0;
+}
+
+#ek-view-loader {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+#ek-view-loader img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--ek-size-loading-gif);
+}
+
+/* Labels & Form Fields */
+.ek-label-field > label,
+.ek-label-field > span {
+  display: block;
+}
+
+.ek-label-field > label {
+  margin-bottom: var(--ek-size-6);
+}
+
+label {
+  color: var(--ek-color-grey-100);
+}
+
 /* Utilities */
 .ek-block {
   display: block;
+}
+
+.ek-visible-false {
+  display: none !important; /* ek-visible-false is a god attribute meant to override any visibility */
+}
+
+.ek-m-bottom {
+  margin-bottom: var(--ek-size-24);
 }

@@ -77,6 +77,10 @@ ek.util.loadFragment = function (obj) {
       retString = this.responseText;
       placeholders = retString.match(reg);
 
+      if (placeholders === null) {
+        return;
+      }
+
       placeholders.forEach((item) => {
         var val = item.match(/(?<=\{{).+?(?=\}})/g); // get just the string inside the {{*}}
 
@@ -111,6 +115,31 @@ ek.util.switchClass = function (elements, element, cls) {
   });
 
   element.classList.add(cls);
+};
+
+ek.util.stringToHtml = function (string) {
+  var template = document.createElement("template");
+  string = string.trim(); // Never return a text node of whitespace as the result
+  template.innerHTML = string;
+  return template.content.firstChild;
+};
+
+ek.util.toggleLoader = function (visibility) {
+  var loader = document.getElementById("ek-view-loader"); // assume the loader dom element is in the markup...
+  var cls = "ek-visible-false";
+
+  if (loader === null) {
+    loader = ek.util.stringToHtml(
+      '<div id="ek-view-loader" class="ek-visible-false"><img src="src/assets/ek-loading-1.gif" /></div>'
+    );
+    document.body.appendChild(loader);
+  }
+
+  if (visibility) {
+    loader.classList.remove(cls);
+  } else {
+    loader.classList.add(cls);
+  }
 };
 
 (function () {

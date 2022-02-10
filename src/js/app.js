@@ -86,6 +86,7 @@ import { ek } from "./ek";
   }
 
   function loadWorkspace(record, doSelect, callback) {
+    ek.util.toggleLoader(true);
     ek.util.loadFragment({
       target: "#ek-workspace-tabs",
       fragment: "workspacetab",
@@ -99,6 +100,7 @@ import { ek } from "./ek";
             if (doSelect !== false) {
               selectWorkspace(record, callback);
             }
+            ek.util.toggleLoader(false);
           }
         });
       }
@@ -168,6 +170,7 @@ import { ek } from "./ek";
   }
 
   function loadSubtab(record, callback) {
+    ek.util.toggleLoader(true);
     ek.util.loadFragment({
       target: "#ek-subtabs-" + record.relatedTo,
       fragment: "subtab",
@@ -179,6 +182,7 @@ import { ek } from "./ek";
           data: record,
           callback: function () {
             selectSubtab(record, callback);
+            ek.util.toggleLoader(false);
           }
         });
       }
@@ -220,13 +224,15 @@ import { ek } from "./ek";
     var tabs = targetTab.closest(".ek-sub-tabs");
     var newTabToSelectData;
 
-    targetView.remove();
-    targetTab.remove();
-
     if (match.id === match.relatedTo) {
       // it's the primary subtab, so close the workspace
-      closeWorkspace(id);
+      if (window.confirm("Close workspace?")) {
+        closeWorkspace(id);
+      }
     } else {
+      targetView.remove();
+      targetTab.remove();
+
       newTabToSelectData = tabs
         .querySelectorAll("li:last-of-type .ek-action-open-record")[0]
         .getAttribute("data-ek"); // select the last tab at the end and extract the target record ID
@@ -243,7 +249,7 @@ import { ek } from "./ek";
     }
 
     openWorkspace(match.id, true, function () {
-      openSubtab(match.id);
+      openSubtab(match.id, function () {});
     });
   }
 
@@ -263,9 +269,10 @@ import { ek } from "./ek";
     }
   });*/
 
-  openWorkspace("home");
+  openRecord("1"); // for testing
+  /*openWorkspace("home");
   openWorkspace("search", false);
-  openWorkspace("messages", false);
+  openWorkspace("messages", false);*/
 
   g_data.forEach((record) => {
     /* TODO: load subtabs from memory, if needed (not yet storing UI state in memory though) */
@@ -327,8 +334,6 @@ import { ek } from "./ek";
       var tabViews = tabContainer.querySelectorAll(":scope > div");
       var tabViewToSelect = tabViews[clickedIndex];
       var selCls = "ek-selected-true";
-
-      console.log();
 
       ek.util.switchClass(tabViews, tabViewToSelect, selCls);
       ek.util.switchClass(tabs, clickedLi, selCls);
