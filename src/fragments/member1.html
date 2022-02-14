@@ -207,12 +207,13 @@
           </div>
           <div class="ek-card">
             <h3>All Notes & Activity</h3>
-            <div class="ek-input ek-input-text">
-              <input type="text" />
+            <div class="ek-input ek-input-text ek-input-icon ek-m-bottom">
+              <input type="text" placeholder="Post a note, comment, or message..." />
+              <span class="ek-icon">messages</span>
             </div>
             <div class="ek-tabs ek-tabs-pills">
               <h3>What happened today</h3>
-              <ul>
+              <ul class="ek-top-right">
                 <li class="ek-selected-true">
                   <a class="ek-action-tab" href="">Everything</a>
                 </li>
@@ -220,7 +221,30 @@
                 <li><a class="ek-action-tab" href="">Change History</a></li>
               </ul>
               <div class="ek-selected-true">
-                Everything
+                <div class="ek-feed-item">
+                  <span class="ek-icon">chat</span>
+                  <strong>Some message title</strong>
+                  <span class="ek-actor">Vivian Seldon</span>
+                  <span class="ek-time">2 min ago</span>
+                </div>
+                <div class="ek-feed-item">
+                  <span class="ek-icon">chat</span>
+                  <strong>Some message title</strong>
+                  <span class="ek-actor">Vivian Seldon</span>
+                  <span class="ek-time">2 min ago</span>
+                </div>
+                <div class="ek-feed-item">
+                  <span class="ek-icon">chat</span>
+                  <strong>Some message title</strong>
+                  <span class="ek-actor">Vivian Seldon</span>
+                  <span class="ek-time">2 min ago</span>
+                </div>
+                <div class="ek-feed-item">
+                  <span class="ek-icon">chat</span>
+                  <strong>Some message title</strong>
+                  <span class="ek-actor">Vivian Seldon</span>
+                  <span class="ek-time">2 min ago</span>
+                </div>
               </div>
               <div>
                 Notes
@@ -234,37 +258,32 @@
         <div class="ek-columns">
           <div class="ek-card">
             <h3>Quick Links</h3>
-            <div class="ek-input ek-input-text">
-              <input type="text" />
+            <div class="ek-input ek-input-text ek-input-icon ek-m-bottom">
+              <input type="text" placeholder="Quick find..." />
+              <span class="ek-icon">search</span>
             </div>
-            <p>
+            <div class="ek-accordion">
               <a class="ek-action-open-record" data-ek='{"id":"1"}' href="">Enrique Desperado</a>
-            </p>
-            <p>
               <a class="ek-action-open-record" data-ek='{"id":"1-loan"}' href="">Loan #444555</a>
-            </p>
-            <p>
               <a class="ek-action-open-record"
                 data-ek='{"id":"1-new-dispute"}'
                 href="">New Dispute</a>
-            </p>
-            <p>
               <a class="ek-action-open-record"
                 data-ek='{"id":"1-edit-member"}'
                 href="">Edit Member</a>
-            </p>
+            </div>
           </div>
           <div class="ek-card">
             <h3>Recent Uploads</h3>
             <div class="ek-media-block">
-              <img src="" />
+              <span class="ek-icon">image</span>
               <div class="ek-label-field">
                 <label class="ek-label"><a href="">Drivers License</a></label>
                 <span class="ek-text-meta">Attached to case #444555</span>
               </div>
             </div>
             <div class="ek-media-block">
-              <img src="" />
+              <span class="ek-icon">image</span>
               <div class="ek-label-field">
                 <label class="ek-label"><a href="">January Paystub</a></label>
                 <span class="ek-text-meta">Attached to case #444555</span>
@@ -273,12 +292,14 @@
           </div>
           <div class="ek-card">
             <h3>Tags</h3>
-            <span class="ek-pill ek-pill-nuetral">high value</span>
-            <span class="ek-pill ek-pill-nuetral">frequent cases</span>
-            <span class="ek-pill ek-pill-nuetral">early adopter</span>
-            <span class="ek-pill ek-pill-nuetral">vip member</span>
-            <span class="ek-pill ek-pill-nuetral">joint account interest</span>
-            <a href="">Add tag</a>
+            <div class="ek-pill-grid">
+              <span class="ek-pill ek-pill-neutral">high value</span>
+              <span class="ek-pill ek-pill-neutral">frequent cases</span>
+              <span class="ek-pill ek-pill-neutral">early adopter</span>
+              <span class="ek-pill ek-pill-neutral">vip member</span>
+              <span class="ek-pill ek-pill-neutral">joint account interest</span>
+              <a href="">Add tag</a>
+            </div>
           </div>
         </div>
       </div>
